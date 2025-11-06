@@ -1,0 +1,88 @@
+/* Contenedor maestro: lista a la izquierda, detalle a la derecha */
+.user-wrapper {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+/* Columna izquierda (lista) */
+.user-list {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  width: 14rem;            /* fija un ancho cómodo a la columna */
+  max-height: 70vh;        /* opcional: scroll si hay muchos */
+  overflow-y: auto;
+}
+
+/* Columna derecha (detalle) ocupa el resto */
+.user-detail {
+  flex: 1;
+  min-width: 0;            /* evita overflow en títulos largos */
+}
+
+/* —— estilos de tus items (mantengo tu diseño) —— */
+
+.user-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.5rem;
+  background-color: #433352;
+  color: #c3b3d1;
+  border: none;
+  font: inherit;
+  cursor: pointer;
+  width: 100%;
+  min-width: 10rem;
+  text-align: left;
+  border-radius: 6px;      /* les doy el radio que antes estaba en div */
+  box-shadow: 0 1px 6px rgba(0,0,0,0.1);
+}
+
+.user-item:hover,
+.user-item:active,
+.user-item.selected {
+  background-color: #9965dd;
+  color: #150722;
+}
+
+.user-item img {
+  width: 2rem;
+  height: 2rem;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: 0 1px 8px rgba(0,0,0,0.3);
+}
+
+.name {
+  margin: 0;
+  padding: 0;
+  font-size: 0.8rem;
+  font-weight: normal;
+}
+
+.check {
+  color: #fff;
+  margin-left: auto;       /* empuja el check a la derecha del botón */
+  font-size: 0.9rem;
+  text-shadow: 0 0 2px rgba(0,0,0,.35), 0 0 4px rgba(0,0,0,.25);
+}
+
+.user-item:focus-visible,
+.user-item.selected:focus-visible {
+  outline: 2px solid #d6b6ff;
+  outline-offset: 2px;
+}
+
+/* Responsive: en móvil apila */
+@media (max-width: 640px) {
+  .user-wrapper {
+    flex-direction: column;
+  }
+  .user-list {
+    width: 100%;
+    max-height: none;
+    overflow: visible;
+  }
+}

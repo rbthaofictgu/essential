@@ -1,0 +1,49 @@
+<div class="user-wrapper">
+  <div class="user-list">
+    @for (u of users(); track u.id; let i = $index) {
+      <button
+        class="user-item"
+        [class.selected]="isSelected(u.id)"
+        (click)="selectUser(u)"
+        title="Seleccionar {{ u.name }}"
+        [attr.aria-pressed]="isSelected(u.id)"
+      >
+        @if (u.longAvatarUrl; as url) {
+          <img
+            [ngSrc]="url"
+            width="48" height="48"
+            alt="{{ u.name }}"
+            decoding="async"
+          />
+        }
+        <span class="name">{{ i + 1 }}. {{ u.name }}</span>
+        @if (isSelected(u.id)) {
+          <span aria-hidden="true" class="check" role="img">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M9 16.2l-3.5-3.5-1.4 1.4L9 19 20 8l-1.4-1.4z"/>
+            </svg>
+          </span>
+        }
+      </button>
+    } @empty {
+      <button class="muted">Sin usuarios</button>
+    }
+  </div>
+
+  <section class="user-detail">
+    @if (selectedUser(); as su) {
+      <h3>Seleccionado: {{ su.name }}</h3>
+
+      @if (su?.longAvatarUrl; as url) {
+        <img
+          [ngSrc]="url"
+          width="160" height="160"
+          alt="{{ su.name }}"
+          decoding="async"
+        />
+      }
+    } @else {
+      <p class="muted">Selecciona un usuario…</p>
+    }
+  </section>
+</div>
