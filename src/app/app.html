@@ -9,19 +9,9 @@
             <li>No hay usuarios</li>
         }
     </ul>
-    <section class="user-detail">
-        @if (selectedUser(); as su) {
-        <h3>Seleccionado: {{ su.name }}</h3>
-        @if (su?.longAvatarUrl; as url) {
-            <img
-            [ngSrc]="url"
-            width="160" height="160"
-            alt="{{ su.name }}"
-            decoding="async"
-            />
-        }
+        @if (selectedUser(); as u) {
+            <app-task [id]="u.id" [name]="u.name" [avatar]="u.longAvatarUrl ?? ''"></app-task>
         } @else {
-            <p class="muted">Selecciona un usuarioâ€¦</p>
+            <p class="muted">Selecciona un usuario</p>
         }
-    </section>
 </main>

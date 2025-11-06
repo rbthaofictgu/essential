@@ -2,12 +2,13 @@ import { Component, signal } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
 import { Header } from "./header/header";
 import { User } from "./user/user";
+import { Task } from "./task/task";
 import { DUMMY_USERS } from './user/dummy-users';
 import { UserType } from './user/user.types';
 
 @Component({
   selector: 'app-root',
-  imports: [Header,User,NgOptimizedImage],
+  imports: [Header,User,Task],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
@@ -24,6 +25,7 @@ export class App {
   );
   // Signal con valor inicial = users[0] (si la lista viniera vacÃ­a queda undefined)
   readonly selectedUser = signal<UserType | undefined>(this.users()[0]);
+  
   constructor() {    
     // (Opcional) Persistencia en localStorage
     const storedUserId = localStorage.getItem('selectedUser');

@@ -1,6 +1,5 @@
 import { PLATFORM_ID,Component, OnInit, Input, Output, EventEmitter,signal, inject } from '@angular/core';
-import { isPlatformBrowser} from '@angular/common';
-import { NgOptimizedImage } from '@angular/common';
+import { isPlatformBrowser,NgOptimizedImage} from '@angular/common';
 
 @Component({
   selector: 'app-user',
