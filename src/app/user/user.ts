@@ -8,23 +8,22 @@ import { NgOptimizedImage } from '@angular/common';
   templateUrl: './user.html',
   styleUrls: ['./user.css']
 })
-export class User implements OnInit  {
 
+export class User implements OnInit  {
   @Input({required: true}) id!: string;
   @Input({required: true}) name!: string;
   @Input({required: true}) avatar!: string;
+  @Input() selected: boolean = false; 
   @Output() selectedUser = new EventEmitter<string>;
-  selected = signal<boolean>(false);
   platformId = inject(PLATFORM_ID);
-
   storedUserId: string | '' = '';
 
   ngOnInit() {
-    // Aquí this.id ya tiene el valor asignado desde el componente padre
+    // AquÃ­ this.id ya tiene el valor asignado desde el componente padre
     if (isPlatformBrowser(this.platformId)) {
       const storedUserId = localStorage.getItem('selectedUser');
       if (storedUserId === this.id) {
-        this.selected.set(true);
+        this.selected=true;
       }
     }
   }
@@ -34,11 +33,12 @@ export class User implements OnInit  {
     if (isPlatformBrowser(this.platformId)) {
       localStorage.setItem('selectedUser', this.id ?? '');
     }
+    this.selected=true;
     this.selectedUser.emit(this.id);
   }
 
   isSelected() {
-    return this.selected();
+    return this.selected;
   }
-  
+
 }

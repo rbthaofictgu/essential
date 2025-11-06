@@ -3,7 +3,7 @@
     <ul id="users">
         @for (u of users(); track u.id; let i = $index) {
         <li>
-            <app-user (selectedUser)="onSelectUser(u.id)" [id]="u.id" [name]="u.name" [avatar]="u.longAvatarUrl ?? ''"></app-user>
+            <app-user [selected]="selectedUser()?.id === u.id" (selectedUser)="onSelectUser(u.id)" [id]="u.id" [name]="u.name" [avatar]="u.longAvatarUrl ?? ''"></app-user>
         </li>
         } @empty {
             <li>No hay usuarios</li>
@@ -12,7 +12,6 @@
     <section class="user-detail">
         @if (selectedUser(); as su) {
         <h3>Seleccionado: {{ su.name }}</h3>
-
         @if (su?.longAvatarUrl; as url) {
             <img
             [ngSrc]="url"
@@ -22,7 +21,7 @@
             />
         }
         } @else {
-        <p class="muted">Selecciona un usuario…</p>
+            <p class="muted">Selecciona un usuarioâ€¦</p>
         }
     </section>
 </main>

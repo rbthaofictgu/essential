@@ -11,8 +11,9 @@ import { UserType } from './user/user.types';
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
+
 export class App {
-  // Ruta base de las imágenes de usuario
+  // Ruta base de las imÃ¡genes de usuario
   readonly path = 'users/';
   //** Fuente de datos  */
   readonly users = signal<UserType[]>(
@@ -21,9 +22,8 @@ export class App {
       longAvatarUrl: u.avatarUrl ? this.path + u.avatarUrl : ''
     }))
   );
-  // Signal con valor inicial = users[0] (si la lista viniera vacía queda undefined)
+  // Signal con valor inicial = users[0] (si la lista viniera vacÃ­a queda undefined)
   readonly selectedUser = signal<UserType | undefined>(this.users()[0]);
-
   constructor() {    
     // (Opcional) Persistencia en localStorage
     const storedUserId = localStorage.getItem('selectedUser');
@@ -31,8 +31,6 @@ export class App {
       this.onSelectUser(storedUserId);
     }
   }
-
-
   // Acciones
   onSelectUser(id: string) {
     this.selectedUser.set(this.users().find(u => u.id === id));
