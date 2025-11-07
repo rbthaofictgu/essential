@@ -2,9 +2,7 @@
 <main>
     <ul id="users">
         @for (u of users(); track u.id; let i = $index) {
-        <li>
             <app-user [selected]="selectedUser()?.id === u.id" (selectedUser)="onSelectUser($event)" [userEnt]="u" [i]="i" ></app-user>
-        </li>
         } @empty {
             <li>No hay usuarios</li>
         }
