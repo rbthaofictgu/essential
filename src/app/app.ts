@@ -1,10 +1,9 @@
 import { Component, signal } from '@angular/core';
-import { NgOptimizedImage } from '@angular/common';
 import { Header } from "./header/header";
 import { User } from "./user/user";
 import { Task } from "./task/task";
 import { DUMMY_USERS } from './user/dummy-users';
-import { UserType } from './user/user.types';
+import { UserType } from './user/user.type';
 
 @Component({
   selector: 'app-root',

@@ -1,5 +1,6 @@
 import { PLATFORM_ID,Component, OnInit, Input, Output, EventEmitter,signal, inject } from '@angular/core';
 import { isPlatformBrowser,NgOptimizedImage} from '@angular/common';
+import { UserType } from './user.type';
 
 @Component({
   selector: 'app-user',
@@ -9,35 +10,33 @@ import { isPlatformBrowser,NgOptimizedImage} from '@angular/common';
 })
 
 export class User implements OnInit  {
-  @Input({required: true}) id!: string;
-  @Input({required: true}) name!: string;
-  @Input({required: true}) avatar!: string;
-  @Input() selected: boolean = false; 
-  @Output() selectedUser = new EventEmitter<string>;
+  @Input({required: true}) userEnt!: UserType;
+  @Input({required: true}) selected!: boolean;
+  @Input({required: true}) i: number = 0;
+  @Output() selectedUser = new EventEmitter<string>();
   platformId = inject(PLATFORM_ID);
-  storedUserId: string | '' = '';
+  storedUserId: string = '';
 
   ngOnInit() {
     // AquÃ­ this.id ya tiene el valor asignado desde el componente padre
     if (isPlatformBrowser(this.platformId)) {
       const storedUserId = localStorage.getItem('selectedUser');
-      if (storedUserId === this.id) {
+      if (storedUserId === this.userEnt.id) {
         this.selected=true;
       }
     }
   }
 
+  onTaskComplete(id: string) {
+    console.log(`Task ${id} completed for user ${this.userEnt.name}`);
+  }
   // Acciones
   onSelectedUser() {
     if (isPlatformBrowser(this.platformId)) {
-      localStorage.setItem('selectedUser', this.id ?? '');
+      localStorage.setItem('selectedUser', this.userEnt.id ?? '');
     }
     this.selected=true;
-    this.selectedUser.emit(this.id);
-  }
-
-  isSelected() {
-    return this.selected;
+    this.selectedUser.emit(this.userEnt.id ?? '');
   }
 
 }

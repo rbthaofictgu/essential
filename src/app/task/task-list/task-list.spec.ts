@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { User } from './user';
+import { TaskList } from './task-list';
 
-describe('User', () => {
-  let component: User;
-  let fixture: ComponentFixture<User>;
+describe('TaskList', () => {
+  let component: TaskList;
+  let fixture: ComponentFixture<TaskList>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [User]
+      imports: [TaskList]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(User);
+    fixture = TestBed.createComponent(TaskList);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

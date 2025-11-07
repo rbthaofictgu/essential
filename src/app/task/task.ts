@@ -1,15 +1,27 @@
-import { Component,Input } from '@angular/core';
-import { NgOptimizedImage} from '@angular/common';
+import { Component, input, signal, computed, Output } from '@angular/core';
+import { DUMMY_TASK } from './task-list/dummy-tasks';
+import { TaskList } from './task-list/task-list';
+import { TaskType } from '../task/task.type';
+import { UserType } from '../user/user.type';
+
 
 @Component({
   selector: 'app-task',
-  imports: [NgOptimizedImage],
+  imports: [TaskList],
   templateUrl: './task.html',
-  styleUrl: './task.css'
+  styleUrls: ['./task.css']
 })
 export class Task {
-  @Input({required: true}) id?: string;
-  @Input({required: true}) name!: string;
-  @Input({required: true}) avatar!: string;
+  user = input.required<UserType>();
+  readonly tasks = signal<TaskType[]>(DUMMY_TASK);
+  readonly taskCompleted = signal<string>('');
 
+  addTask() {
+    alert(`Task added for ${this.user?.name ?? 'unknown user'}`);
+  }
+
+  getTasks() {
+    return this.tasks().filter(task => task.userId === this.user().id);
+  }
+  
 }

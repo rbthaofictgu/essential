@@ -3,15 +3,15 @@
     <ul id="users">
         @for (u of users(); track u.id; let i = $index) {
         <li>
-            <app-user [selected]="selectedUser()?.id === u.id" (selectedUser)="onSelectUser(u.id)" [id]="u.id" [name]="u.name" [avatar]="u.longAvatarUrl ?? ''"></app-user>
+            <app-user [selected]="selectedUser()?.id === u.id" (selectedUser)="onSelectUser($event)" [userEnt]="u" [i]="i" ></app-user>
         </li>
         } @empty {
             <li>No hay usuarios</li>
         }
     </ul>
-        @if (selectedUser(); as u) {
-            <app-task [id]="u.id" [name]="u.name" [avatar]="u.longAvatarUrl ?? ''"></app-task>
-        } @else {
-            <p class="muted">Selecciona un usuario</p>
-        }
+    @if (selectedUser(); as u) {
+        <app-task [user]="u"></app-task>
+    } @else {
+        <p class="muted">Selecciona un usuario para ver sus tareas</p>
+    }
 </main>

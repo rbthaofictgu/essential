@@ -26,6 +26,11 @@ button:active,
   color: #150722;
 }
 
+.selected  {
+  background-color: #9965dd;
+  color: #150722;
+}
+
 img {
   width: 2rem;
   height: 2rem;
