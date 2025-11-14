@@ -1,10 +1,11 @@
 import { PLATFORM_ID,Component, OnInit, Input, Output, EventEmitter,signal, inject } from '@angular/core';
 import { isPlatformBrowser,NgOptimizedImage} from '@angular/common';
+import { Card } from '../shared/card/card';
 import { UserType } from './user.type';
 
 @Component({
   selector: 'app-user',
-  imports: [NgOptimizedImage],
+  imports: [Card,NgOptimizedImage],
   templateUrl: './user.html',
   styleUrls: ['./user.css']
 })

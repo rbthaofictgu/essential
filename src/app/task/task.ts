@@ -1,45 +1,35 @@
-import { Component, input, signal, computed, Output } from '@angular/core';
-import { DUMMY_TASK } from './task-list/dummy-tasks';
-import { TaskList } from './task-list/task-list';
-import { TaskType } from '../task/task.type';
+import { Component, inject, input } from '@angular/core';
+import { Card } from "../shared/card/card";
 import { UserType } from '../user/user.type';
+import { TaskFacade } from './facade/task-facade';
 import { NewTask } from "./new-task/new-task";
-import { NewTaskModel } from './new-task/new-task.model';
+import { TaskList } from './task-list/task-list';
 
 @Component({
   selector: 'app-task',
-  imports: [TaskList, NewTask],
+  imports: [TaskList, NewTask, Card],
   templateUrl: './task.html',
   styleUrls: ['./task.css']
 })
 export class Task {
+  private readonly TaskFacade = inject(TaskFacade);
   user = input.required<UserType>();
-  //readonly tasks = signal<TaskType[]>(DUMMY_TASK);
-  readonly tasks: TaskType[] = DUMMY_TASK;
   isAddingTask = false;
 
   onStartTask() {
     this.isAddingTask =true;
   }
 
-  onCancelAddTask() {
-    this.isAddingTask =false;
-  }
-
-  onAddTask(newTask: NewTaskModel) {
-    //this.tasks.update(tasks => [...tasks, {id: Math.random().toString(), userId: this.user().id, title: newTask.title, summary: newTask.summary, dueDate: new Date()}]);
-    this.tasks.unshift({id: Math.random().toString(), userId: this.user().id, title: newTask.title, summary: newTask.summary, dueDate: new Date()}]);
+  onCloseAddTask() {
     this.isAddingTask =false;
   }
 
   getTasks() {
-    //return this.tasks().filter(task => task.userId === this.user().id);
-    return this.tasks.filter(task => task.userId === this.user().id);
+    return this.TaskFacade.getTask(this.user().id);
   }
 
   onTaskCompleted(taskId: string) {
-    //this.tasks.update(tasks => tasks.filter(task => task.id !== taskId));
-    this.tasks.filter(task => task.id !== taskId);
+    this.TaskFacade.completeTask(taskId);
   }
 
 }

@@ -1,20 +1,19 @@
 @if(isAddingTask) {
-    <app-new-task (addingTask)="onCancelAddTask()" (taskCreated)="onAddTask($event)"></app-new-task>
+    <app-new-task [userID]="this.user().id" (close)="onCloseAddTask()"></app-new-task>
 }
-<section id="task">
-    <header>
-        <h2>{{user().name}}'s Task</h2>
-        <menu>
-            <button (click)="onStartTask()">ADD TASK</button>
-        </menu>
-    </header>
-    <ul>
-        <li></li>
-    </ul>
-    @for (task of getTasks(); track task.id; let i = $index) {
-        <app-task-list (completeTask)="onTaskCompleted($event)" [task]="task"></app-task-list>
-        <br/>
-    } @empty {
-        <li>No hay tareas registradas para el usuario: {{ user().name }}</li>
-    }
-</section>
+<app-card>
+    <section id="task">
+        <header>
+            <h2>{{user().name}}'s Task</h2>
+            <menu>
+                <button (click)="onStartTask()">ADD TASK</button>
+            </menu>
+        </header>
+        @for (task of getTasks(); track task.id; let i = $index) {
+            <app-task-list (completeTask)="onTaskCompleted($event)" [task]="task"></app-task-list>
+            <br/>
+        } @empty {
+            <li>  No hay tareas registradas para el usuario: {{ user().name }}</li>
+        }
+    </section>
+</app-card> 

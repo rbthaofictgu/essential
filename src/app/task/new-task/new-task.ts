@@ -1,8 +1,7 @@
-import { Component, EventEmitter, Output, signal, ViewChild, input } from '@angular/core';
-import { NgForm, FormsModule} from '@angular/forms';
-import { DUMMY_TASK } from '../task-list/dummy-tasks';
+import { Component, EventEmitter, inject, input, Output, ViewChild } from '@angular/core';
+import { FormsModule, NgForm } from '@angular/forms';
+import { TaskFacade } from '../facade/task-facade';
 import { NewTaskModel } from '../new-task/new-task.model';
-
 
 @Component({
   selector: 'app-new-task',
@@ -11,9 +10,10 @@ import { NewTaskModel } from '../new-task/new-task.model';
   styleUrl: './new-task.css'
 })
 export class NewTask {
+  @Output() close = new EventEmitter<void>();
   @ViewChild('newTaskForm') form?: NgForm;
-  @Output() addingTask = new EventEmitter<void>();
-  @Output() taskCreated = new EventEmitter<NewTaskModel>(); // ← emitimos el task
+  private readonly TaskFacade = inject(TaskFacade);
+  userID = input.required<string>();
   enteredTitle = '';
   enteredSummary = '';
   enteredDueDate = '';
@@ -24,12 +24,14 @@ export class NewTask {
       title: this.enteredTitle,
       summary: this.enteredSummary,
       };
-      this.taskCreated.emit(NewTaskModel);
+      this.TaskFacade.addTask(this.userID(),NewTaskModel);
+      this.close.emit();
     }  
   }
 
-  onCancel() {
-    this.addingTask.emit();
+  onClose() {
+    this.close.emit();
   }
+
 }
 
