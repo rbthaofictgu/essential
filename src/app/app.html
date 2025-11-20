@@ -1,15 +1,2 @@
 <app-header></app-header>
-<main>
-    <ul id="users">
-        @for (u of users(); track u.id; let i = $index) {
-            <app-user [selected]="selectedUser()?.id === u.id" (selectedUser)="onSelectUser($event)" [userEnt]="u" [i]="i" ></app-user>
-        } @empty {
-            <li>No hay usuarios</li>
-        }
-    </ul>
-    @if (selectedUser(); as u) {
-        <app-task [user]="u"></app-task>
-    } @else {
-        <p class="muted">Selecciona un usuario para ver sus tareas</p>
-    }
-</main>
+<app-user-input></app-user-input>

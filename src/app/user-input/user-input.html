@@ -1,0 +1,69 @@
+<form #userInputForm="ngForm" (ngSubmit)="onSubmit()">
+    <div class="input-group">
+        <p>
+            <label for="initial-investment">Initial Investment</label>
+            <input 
+            type="number" 
+            id="initial-investment" 
+            name="initial-investment" 
+            ngModel
+            required
+            minlength="3"
+            maxlength="10"
+            [(ngModel)]="enteredInitialInvesment"
+            [ngModelOptions]="{updateOn: 'blur'}"
+            />
+        </p>
+        <p>
+            <label for="annual-investment">Annual Investment</label>
+            <input 
+            id="annual-investment" 
+            name="annual-investment"
+            ngModel
+            required
+            minlength="3"
+            maxlength="10"
+            [(ngModel)]="enteredAnnualInvesment"
+            [ngModelOptions]="{updateOn: 'blur'}"
+            />
+        </p>
+    </div>
+
+    <div class="input-group">
+        <p>
+            <label for="expected-return">Expected Return</label>
+            <input 
+            type="number" 
+            id="expected-return" 
+            name="expected-return" 
+            ngModel
+            required
+            minlength="1"
+            maxlength="6"
+            [(ngModel)]="enteredExpectedReturn"
+            [ngModelOptions]="{updateOn: 'blur'}"
+            />
+        </p>
+        <p>
+            <label for="duration">Duration</label>
+            <input 
+            id="duration" 
+            name="duration"
+            ngModel
+            required
+            minlength="1"
+            maxlength="4"
+            [(ngModel)]="enteredInvestmentDuration"
+            [ngModelOptions]="{updateOn: 'blur'}"
+            />
+        </p>
+    </div>
+    <div class="input-group">
+        <button type="button" (click)="onClear()">Clear</button>
+        <button [disabled]="userInputForm.invalid" type="submit">CALCULATE</button>
+    </div>
+</form>
+<app-investment-results
+  [investmentResultModel]="investmentResults()"
+  [totals]="investmentTotals()">
+</app-investment-results>

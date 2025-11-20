@@ -1,0 +1,31 @@
+@if (investmentResultModel().length > 0) {
+  <table>
+    <caption class="center-content">INVESTMENT CALCULATIONS</caption>
+    <thead>
+      <tr>
+        <th>AÑO</th>
+        <th>YOUR INVEST</th>
+        <th>PRINCIPAL</th>
+        <th>ANUAL INTERESES</th>
+        <th>TOTAL AT YEAR END</th>
+        <th>INTERESES ACUMULADOS</th>
+        <th>ANNUALITY ACUMULADA</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (year of investmentResultModel(); track year.year; let i = $index) {
+        <tr>
+          <td>{{ year.year }}</td>
+          <td>{{ year.totalInvest| currency: moneda }}</td>
+          <td>{{ year.principalAmount | currency: moneda }}</td>
+          <td>{{ year.interestAmount | currency: moneda}}</td>
+          <td>{{ year.totalAmount | currency: moneda }}</td>
+          <td>{{ year.accruedInterest| currency: moneda}}</td>
+          <td>{{ year.accruedAnnuality| currency: moneda }}</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+} @else {
+  <p>Please enter some values and press "CALCULATE"</p>
+}
