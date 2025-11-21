@@ -27,10 +27,13 @@
     "@angular/core": "^20.3.0",
     "@angular/forms": "^20.3.0",
     "@angular/platform-browser": "^20.3.0",
+    "@angular/platform-browser-dynamic": "^21.0.0",
     "@angular/router": "^20.3.0",
     "@ngrx/signals": "^20.1.0",
+    "platform-browser-dynamic": "^0.0.1-security",
     "rxjs": "~7.8.0",
-    "tslib": "^2.3.0"
+    "tslib": "^2.3.0",
+    "zone.js": "^0.15.1"
   },
   "devDependencies": {
     "@angular/build": "^20.3.4",

@@ -1,10 +1,8 @@
-import { CommonModule } from '@angular/common';
 import { Component, input } from '@angular/core';
-
 import { investmentResultModel, InvestmentTotals } from './investment-result.model';
 @Component({
   selector: 'app-investment-results',
-  imports: [CommonModule],
+  standalone: false,
   templateUrl: './investment-results.html',
   styleUrl: './investment-results.css'
 })

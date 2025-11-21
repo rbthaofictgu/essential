@@ -3,10 +3,8 @@ import { NgOptimizedImage } from "@angular/common";
 
 @Component({
   selector: 'app-header',
-  imports: [NgOptimizedImage],
+  standalone: false,
   templateUrl: './header.html',
   styleUrl: './header.css'
 })
-export class Header {
-
-}
+export class Header {}

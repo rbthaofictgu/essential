@@ -1,15 +1,13 @@
 import { Component, computed, inject, signal, ViewChild } from '@angular/core';
-import { FormsModule, NgForm } from '@angular/forms';
+import { NgForm } from '@angular/forms';
 
 import { investmentResultModel } from '../investment-results/investment-result.model';
-import { InvestmentResults } from '../investment-results/investment-results';
 import { UserInputFacade } from './facade/user-input-facade';
 import { userInputModel } from './user-input.model';
 
 @Component({
   selector: 'app-user-input',
-  standalone: true,
-  imports: [FormsModule,InvestmentResults],
+  standalone: false,
   templateUrl: './user-input.html',
   styleUrl: './user-input.css'
 })
